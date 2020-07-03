@@ -10,6 +10,7 @@
 
 .gallery__list img {
   height: 100%;
+  object-fit: cover;
 }
 
 .gallery__list li:hover .gallery__list-item-del {

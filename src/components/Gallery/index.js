@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
+import { reducer } from "./../../store";
 import "./style.scss";
 
 const Image = (props) => {
@@ -26,7 +27,8 @@ const Image = (props) => {
   );
 };
 
-const Gallery = () => {
+const Gallery = (props) => {
+  const { storeImages, dispatch } = props;
   // input file
   const [images, setImages] = useState([]);
   // input text
@@ -51,10 +53,10 @@ const Gallery = () => {
     fileReader.readAsText(file);
   };
 
-  // загрузить картинку
-  const handleSubmit = (event) => {
+  // загрузить картинку файлом
+  const handleSubmitJson = (event) => {
     event.preventDefault();
-    setImages([...images, ...galleryImages]);
+    dispatch({ type: "ADD_JSON_TO_LIST", files: galleryImages });
   };
 
   // вставить картинку ссылкой
@@ -69,7 +71,7 @@ const Gallery = () => {
 
   // удалить картинку
   const handleImageDelete = (imageIndex) => {
-    setImages([...images.filter((image, index) => index !== imageIndex)]);
+    dispatch({ type: "REMOVE_IMAGE", index: imageIndex });
   };
 
   return (
@@ -86,13 +88,13 @@ const Gallery = () => {
             ref={inputRef}
             onChange={(e) => handleFileChosen(e.target.files[0])}
           />
-          <label htmlFor="upload">Загрузить</label>
-          <button onClick={handleSubmit}>Submit</button>
+          {/* <label htmlFor="upload"></label> */}
+          <button onClick={handleSubmitJson}>Загрузить</button>
         </div>
       </form>
 
       <ul className="gallery__list">
-        {images.map((image, index) => (
+        {storeImages.map((image, index) => (
           <li key={index}>
             <Image
               url={image.url}

@@ -25,27 +25,17 @@ const DragAndDrop = (props) => {
   const handleDrop = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    // let files = [...e.dataTransfer.files];
+
     // текущий выбранный или перетащенный файл
     const file = [...e.dataTransfer.files][0];
-
-    // if (files && files.length > 0) {
-    //   const existingFiles = data.fileList.map((f) => f.name);
-    //   files = files.filter((f) => !existingFiles.includes(f.name));
-
-    //   dispatch({ type: "ADD_FILE_TO_LIST", files });
-    //   e.dataTransfer.clearData();
-    //   dispatch({ type: "SET_DROP_DEPTH", dropDepth: 0 });
-    //   dispatch({ type: "SET_IN_DROP_ZONE", inDropZone: false });
-    // }
 
     let fileReader = new FileReader();
     // Прочитать файл как Data URL - сконвертировать картинку в base64
     fileReader.readAsDataURL(file);
 
     fileReader.onload = () => {
-      const imgSrc = fileReader.result;
-      dispatch({ type: "ADD_FILE_TO_LIST", imgSrc });
+      const files = fileReader.result;
+      dispatch({ type: "ADD_FILE_TO_LIST", files });
     };
 
     fileReader.onabort = () => {
