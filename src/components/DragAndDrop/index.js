@@ -2,7 +2,7 @@ import React from "react";
 import "./style.scss";
 
 const DragAndDrop = (props) => {
-  const { data, dispatch } = props;
+  const { data, dispatch, children } = props;
 
   const handleDragEnter = (e) => {
     e.preventDefault();
@@ -66,8 +66,7 @@ const DragAndDrop = (props) => {
       onDragOver={(e) => handleDragOver(e)}
       onDragEnter={(e) => handleDragEnter(e)}
       onDragLeave={(e) => handleDragLeave(e)}
-    >
-      <p>Drag files here to upload</p>
+    >{children}
     </div>
   );
 };

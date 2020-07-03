@@ -66,7 +66,7 @@ const Gallery = (props) => {
 
   const handleImageAdd = (event) => {
     event.preventDefault();
-    setImages([...images, { url: imageInput }]);
+    dispatch({ type: "ADD_FILE_TO_LIST", files: imageInput });
   };
 
   // удалить картинку

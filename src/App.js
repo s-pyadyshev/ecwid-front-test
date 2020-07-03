@@ -14,8 +14,9 @@ function App() {
   return (
     <div className="App">
       <div className="container">
-        <Gallery storeImages={data.fileList} dispatch={dispatch} />
-        <DragAndDrop data={data} dispatch={dispatch} />
+        <DragAndDrop data={data} dispatch={dispatch}>
+          <Gallery storeImages={data.fileList} dispatch={dispatch} />
+        </DragAndDrop>
         {/* <ol className="dropped-files">
           {data.fileList.map((file, index) => {
             return (
