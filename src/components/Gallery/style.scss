@@ -1,0 +1,24 @@
+.gallery__list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.gallery__list li {
+  margin: 0 5px 5px 5px;
+  position: relative;
+}
+
+.gallery__list img {
+  height: 100%;
+}
+
+.gallery__list li:hover .gallery__list-item-del {
+  display: block;
+}
+
+.gallery__list-item-del {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
