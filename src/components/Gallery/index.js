@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef } from "react";
-import { reducer } from "./../../store/store";
 import "./style.scss";
 
 const Image = (props) => {
@@ -29,8 +28,6 @@ const Image = (props) => {
 
 const Gallery = (props) => {
   const { storeImages, dispatch } = props;
-  // input file
-  const [images, setImages] = useState([]);
   // input text
   const [imageInput, setImageInput] = useState("");
   const inputRef = useRef();
@@ -38,7 +35,7 @@ const Gallery = (props) => {
   let fileReader;
   let galleryImages = [];
 
-  const handleFileRead = (e) => {
+  const handleFileRead = () => {
     const content = JSON.parse(fileReader.result).galleryImages;
     galleryImages = content;
   };
@@ -52,6 +49,7 @@ const Gallery = (props) => {
   // загрузить картинку файлом
   const handleSubmitJson = (event) => {
     event.preventDefault();
+
     dispatch({
       type: "ADD_JSON_TO_LIST",
       files: galleryImages,
@@ -99,10 +97,10 @@ const Gallery = (props) => {
 
       <ul className="gallery__list">
         {storeImages.map((image, index) => (
-          <li key={index}>
+          <li key={index} className="gallery__item">
             <Image url={image.url} width={image.width} height={image.height} />
             <button
-              className="gallery__list-item-del"
+              className="gallery__item-remove"
               onClick={() => handleImageDelete(index)}
             >
               remove
