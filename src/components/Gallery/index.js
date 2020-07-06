@@ -20,7 +20,7 @@ const Image = (props) => {
           style={{ width: imageWidth }}
         />
       ) : (
-        <div style={{ width: imageWidth }}>...loading</div>
+        <div style={{ width: imageWidth }}>...Загрузка</div>
       )}
     </>
   );
@@ -54,6 +54,8 @@ const Gallery = (props) => {
       type: "ADD_JSON_TO_LIST",
       files: galleryImages,
     });
+
+    inputRef.current.value = "";
   };
 
   // вставить картинку ссылкой
@@ -103,7 +105,7 @@ const Gallery = (props) => {
               className="gallery__item-remove"
               onClick={() => handleImageDelete(index)}
             >
-              remove
+              Удалить
             </button>
           </li>
         ))}
