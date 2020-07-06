@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { reducer } from "./../../store";
+import { reducer } from "../../store/store";
 import "./style.scss";
 
 const Image = (props) => {
@@ -8,6 +8,10 @@ const Image = (props) => {
 
   useEffect(() => {
     setLoaded(true);
+    function handleResize() {
+      console.log("resized to: ", window.innerWidth, "x", window.innerHeight);
+    }
+    window.addEventListener("resize", handleResize);
   }, []);
 
   return (
@@ -95,7 +99,7 @@ const Gallery = (props) => {
 
       <ul className="gallery__list">
         {storeImages.map((image, index) => (
-          <li key={index}>
+          <li key={index} width={imageWidth}>
             <Image
               url={image.url}
               width={image.width}
@@ -105,9 +109,7 @@ const Gallery = (props) => {
             <button
               className="gallery__list-item-del"
               onClick={() => handleImageDelete(index)}
-            >
-              remove
-            </button>
+            >remove</button>
           </li>
         ))}
       </ul>

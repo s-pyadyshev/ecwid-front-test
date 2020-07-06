@@ -51,6 +51,7 @@ const DragAndDrop = (props) => {
       type: "SET_DROP_DEPTH",
       dropDepth: 0,
     });
+    
     dispatch({
       type: "SET_IN_DROP_ZONE",
       inDropZone: false,
