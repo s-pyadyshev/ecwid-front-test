@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { reducer } from "./../../store";
+import { reducer } from "./../../store/store";
 import "./style.scss";
 
 const Image = (props) => {
@@ -33,11 +33,7 @@ const Gallery = (props) => {
   const [images, setImages] = useState([]);
   // input text
   const [imageInput, setImageInput] = useState("");
-
   const inputRef = useRef();
-  const imagesPerRow = 5;
-  const containerMaxWidth = 860;
-  const imageWidth = containerMaxWidth / imagesPerRow - 10 + "px";
 
   let fileReader;
   let galleryImages = [];
@@ -56,7 +52,10 @@ const Gallery = (props) => {
   // загрузить картинку файлом
   const handleSubmitJson = (event) => {
     event.preventDefault();
-    dispatch({ type: "ADD_JSON_TO_LIST", files: galleryImages });
+    dispatch({
+      type: "ADD_JSON_TO_LIST",
+      files: galleryImages,
+    });
   };
 
   // вставить картинку ссылкой
@@ -66,16 +65,22 @@ const Gallery = (props) => {
 
   const handleImageAdd = (event) => {
     event.preventDefault();
-    dispatch({ type: "ADD_FILE_TO_LIST", files: imageInput });
+    dispatch({
+      type: "ADD_FILE_TO_LIST",
+      files: imageInput,
+    });
   };
 
   // удалить картинку
   const handleImageDelete = (imageIndex) => {
-    dispatch({ type: "REMOVE_IMAGE", index: imageIndex });
+    dispatch({
+      type: "REMOVE_IMAGE",
+      index: imageIndex,
+    });
   };
 
   return (
-    <div>
+    <div className="gallery">
       <form>
         <div>
           <input type="text" onChange={handleInputText} />
@@ -88,7 +93,6 @@ const Gallery = (props) => {
             ref={inputRef}
             onChange={(e) => handleFileChosen(e.target.files[0])}
           />
-          {/* <label htmlFor="upload"></label> */}
           <button onClick={handleSubmitJson}>Загрузить</button>
         </div>
       </form>
@@ -96,12 +100,7 @@ const Gallery = (props) => {
       <ul className="gallery__list">
         {storeImages.map((image, index) => (
           <li key={index}>
-            <Image
-              url={image.url}
-              width={image.width}
-              height={image.height}
-              imageWidth={imageWidth}
-            />
+            <Image url={image.url} width={image.width} height={image.height} />
             <button
               className="gallery__list-item-del"
               onClick={() => handleImageDelete(index)}
