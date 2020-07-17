@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import "./style.scss";
+import Loading from "../Loading";
 
 const Image = (props) => {
   const { url, width, height, imageWidth } = props;
@@ -20,7 +21,9 @@ const Image = (props) => {
           style={{ width: imageWidth }}
         />
       ) : (
-        <div style={{ width: imageWidth }}>...Загрузка</div>
+        <div style={{ width: imageWidth }}>
+          <Loading />
+        </div>
       )}
     </>
   );

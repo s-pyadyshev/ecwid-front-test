@@ -1,27 +1,26 @@
 .gallery {
   &__item {
     position: relative;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    width: auto;
-    max-height: 155px;
     margin: 0 5px 5px 5px;
+    height: auto;
 
-    @media (max-aspect-ratio: 1/1) {
-      height: 30vh;
+    @media (min-width: 640px) {
+      width: auto;
+      height: inherit;
     }
 
     &:hover .gallery__item-remove {
       display: block;
     }
 
-    img {
-      max-width: 100%;
-      width: auto;
-      max-height: 155px;
-      object-fit: cover;
-    }
+    // img {
+    //   width: 100%;
+    //   height: inherit;
+
+    //   @media (min-width: 640px) {
+    //     width: auto;
+    //   }
+    // }
   }
 
   &__item-remove {
@@ -35,5 +34,10 @@
   &__list {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+
+    @media (min-width: 640px) {
+      justify-content: flex-start;
+    }
   }
 }
